@@ -1,0 +1,28 @@
+name: Run Moyoplan Daily
+
+on:
+  schedule:
+    - cron: '30 22 * * *'  # 매일 오후 10시 30분 (한국 시간 오전 7시 30분)
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run script
+        env:
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: |
+          python moyo_프로모션조사_구문_260325.py
