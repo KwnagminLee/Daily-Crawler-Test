@@ -1,4 +1,4 @@
-name: Run Moyoplan Daily (test)
+name: Run MVNO.COM Daily (test)
 
 on:
   schedule:
